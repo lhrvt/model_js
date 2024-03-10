@@ -1,18 +1,18 @@
-import * as THREE from './three.js-master/three.js-master/build/three.module.js'
-import {GLTFLoader} from './three.js-master/three.js-master/examples/jsm/loaders/GLTFLoader.js'
+import * as THREE from './build/three.module.js'
+import {GLTFLoader} from './build/GLTFLoader.js'
 
 const canvas  = document.querySelector('.webgl')
 const scene = new THREE.Scene()
 
-// const loader = new GLTFLoader()
+ const loader = new GLTFLoader()
 
-// loader.load('cuisinne_urp.glb', function(gltf){
-// console.log(gltf)
-// }, function(xhr){
-//     console.log(xhr.loaded/xhr.total * 100 + "% loaded")
-// }, function(error){
-//     console.log('An error')
-// })
+ loader.load('asset/cuisinne_urp.glb', function(gltf){
+ console.log(gltf)
+ }, function(xhr){
+    console.log(xhr.loaded/xhr.total * 100 + "% loaded")
+}, function(error){
+     console.log('An error')
+ })
 
 
 
