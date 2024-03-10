@@ -6,15 +6,20 @@ const scene = new THREE.Scene()
 
  const loader = new GLTFLoader()
 
- loader.load('asset/cuisinne_urp.glb', function(gltf){
- console.log(gltf)
+ loader.load('asset/cuisinne_urp.glb', function(glb){
+    console.log(glb)
+    const root = glb.scene;
+    scene.add(root);
+
  }, function(xhr){
     console.log(xhr.loaded/xhr.total * 100 + "% loaded")
 }, function(error){
      console.log('An error')
  })
 
-
+const light = new THREE.DirectionalLight(0xffffff, 1)
+light.position.set(2,2,5)
+scene.add(light)
 
 
 const geometry = new THREE.BoxGeometry(1,1,1)
@@ -24,7 +29,7 @@ const material = new THREE.MeshBasicMaterial({
 })
 const boxMesh = new THREE.Mesh(geometry, material)
 
-scene.add(boxMesh)
+//scene.add(boxMesh)
 
 
 
@@ -49,7 +54,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.shadowMap.enabled = true
 renderer.gammaOutput= true
 
-renderer.render(scene, camera)
 
+
+function animate(){
+    requestAnimationFrame(animate)
+    renderer.render(scene,camera)
+}
+
+animate()
 
 
