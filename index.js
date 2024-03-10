@@ -5,10 +5,13 @@ const canvas  = document.querySelector('.webgl')
 const scene = new THREE.Scene()
 
  const loader = new GLTFLoader()
+ let root;
 
  loader.load('asset/cuisinne_urp.glb', function(glb){
     console.log(glb)
-    const root = glb.scene;
+    root = glb.scene;
+    root.position.set(0,0,0)
+    root.rotation.y = -Math.PI / 2;
     scene.add(root);
 
  }, function(xhr){
@@ -40,7 +43,7 @@ const sizes = {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width/sizes.height, 0.1, 100);
-camera.position.set(0,1,2);
+camera.position.set(0,1,4);
 scene.add(camera)
 
 
@@ -58,7 +61,13 @@ renderer.gammaOutput= true
 
 function animate(){
     requestAnimationFrame(animate)
+
+    if (root){
+    const time = Date.now() * 0.001;
+    root.rotation.y = time;
+    
     renderer.render(scene,camera)
+    }
 }
 
 animate()
